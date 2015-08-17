@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+		
+	<task:executor id="executor" pool-size="50" />
+	<task:scheduler id="scheduler" pool-size="100" />  
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.163.com" />
+		<property name="username" value="weixin_api@163.com" />
+		<property name="password" value="WEIXIN" />
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="freeMarker" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">    
+      <property name="templateLoaderPath" value="classpath:/template"/>
+      <property name="freemarkerSettings">  
+          <props>    
+              <prop key="template_update_delay">1800</prop> 
+              <prop key="default_encoding">UTF-8</prop> 
+              <prop key="locale">zh_CN</prop>   
+          </props>    
+      </property>    
+    </bean>  
+	
+</beans>
