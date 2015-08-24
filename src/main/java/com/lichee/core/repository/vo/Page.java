@@ -1,5 +1,6 @@
 package com.lichee.core.repository.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -15,7 +16,7 @@ import com.google.common.collect.Lists;
  * 
  * @author lichee
  */
-public class Page<T> {
+public class Page<T> implements Serializable {
 	//-- 公共变量 --//
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
