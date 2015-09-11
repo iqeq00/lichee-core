@@ -8,6 +8,8 @@
 	<property name="contentPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n" />
 	<property name="file" value="${filePath}/${projectName:-${fileDefaultName}}.log" />
 	<property name="fileNamePattern" value="${filePath}/${projectName:-${fileDefaultName}}.${filePattern}.log" />
+	<property name="package" value="${package:-${packageDefaultName}}" />
+	<property name="packageDefaultName" value="com" />
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
@@ -25,8 +27,10 @@
 		</encoder>
 	</appender>
 	
-	<logger name="com" level="INFO" />
+	<logger name="${package}" level="INFO" />
 	<logger name="jdbc.sqltiming" level="INFO" />
+	<logger name="com.google" level="ERROR" />
+	<logger name="net.rubyeye" level="ERROR" />
 	
 	<root level="WARN">
 		<appender-ref ref="console" />
