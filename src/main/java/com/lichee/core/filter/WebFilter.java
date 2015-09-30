@@ -4,11 +4,11 @@ import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 
 /**
- * manager filter
+ * web filter
  * 
  * @author lichee
  */
-public class ManagerFilter extends ConfigurableSiteMeshFilter {
+public class WebFilter extends ConfigurableSiteMeshFilter {
 
 	@Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
@@ -16,6 +16,8 @@ public class ManagerFilter extends ConfigurableSiteMeshFilter {
 		builder.addExcludedPath("/common/*");
 		builder.addExcludedPath("/manager/login");
 		builder.addDecoratorPath("/manager/*","/WEB-INF/layouts/manager/manager.jsp");
+		builder.addExcludedPath("/customer/login");
+		builder.addDecoratorPath("/customer/*","/WEB-INF/layouts/customer/customer.jsp");
     }
 
 }
