@@ -18,6 +18,14 @@
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan> 
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/common/**" />
+			<bean class="com.lichee.core.web.interceptors.TokenInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<mvc:annotation-driven validator="validator" conversion-service="conversionService">
 		<mvc:message-converters register-defaults="true">
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">

@@ -16,7 +16,8 @@ public class WebFilter extends ConfigurableSiteMeshFilter {
 		builder.addExcludedPath("/common/*");
 		builder.addExcludedPath("/manager/login");
 		builder.addDecoratorPath("/manager/*","/WEB-INF/layouts/manager/manager.jsp");
-		builder.addExcludedPath("/customer/login");
+		builder.addExcludedPath("/customer/login/*");
+		builder.addExcludedPath("/customer/register/*");
 		builder.addDecoratorPath("/customer/*","/WEB-INF/layouts/customer/customer.jsp");
     }
 
