@@ -98,5 +98,14 @@ public class WebSupport {
 				+ (String) request.getSession().getAttribute(name);
 		return url;
 	}
+	
+	public static boolean isAjaxRequest(HttpServletRequest request) {  
+	    
+		String header = request.getHeader("X-Requested-With");  
+	    if (header != null && "XMLHttpRequest".equals(header))  
+	        return true;  
+	    else  
+	        return false;  
+	}  
 
 }

@@ -1,5 +1,6 @@
 package com.lichee.core.security.sha;
 
+import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
@@ -12,15 +13,15 @@ public class Digests {
 	
 	private static final String SHA = "SHA-512";
 
-	private static byte[] sha(byte[] input, byte[] salt, int iterations) {
+	private static byte[] sha(byte[] input, String salt, int iterations) {
 		return digest(input, SHA, salt, iterations);
 	}
 	
-	private static byte[] digest(byte[] input, String algorithm, byte[] salt, int iterations) {
+	private static byte[] digest(byte[] input, String algorithm, String salt, int iterations) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance(algorithm);
 			if (salt != null) {
-				digest.update(salt);
+				digest.update(salt.getBytes("utf-8"));
 			}
 			byte[] result = digest.digest(input);
 			iterations = iterations + 323; 
@@ -31,28 +32,31 @@ public class Digests {
 			return result;
 		} catch (GeneralSecurityException e) {
 			throw Exceptions.unchecked(e);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
 	public static String shaHex(String input, String salt) {
-		return EncodeUtils.hexEncode(sha(input.getBytes(), salt.getBytes(), (input+salt).length()));
+		return EncodeUtils.hexEncode(sha(input.getBytes(), salt, (input+salt).length()));
 	}
 	
 	public static String shaHex(String input, String salt, int iterations) {
-		return EncodeUtils.hexEncode(sha(input.getBytes(), salt.getBytes(), iterations));
+		return EncodeUtils.hexEncode(sha(input.getBytes(), salt, iterations));
 	}
 	
 	public static String shaBase64(String input, String salt) {
-		return EncodeUtils.base64Encode(sha(input.getBytes(), salt.getBytes(), (input+salt).length()));
+		return EncodeUtils.base64Encode(sha(input.getBytes(), salt, (input+salt).length()));
 	}
 	
 	public static String shaBase64(String input, String salt, int iterations) {
-		return EncodeUtils.base64Encode(sha(input.getBytes(), salt.getBytes(), iterations));
+		return EncodeUtils.base64Encode(sha(input.getBytes(), salt, iterations));
 	}
 	
 	public static void main(String[] args) {
-		String anc = "wd_c";	
-		String pwd = "000000";	
+		String anc = "姚金池";	
+		String pwd = "123456";	
 		System.out.println(shaHex(pwd, anc));
 	}
 	
