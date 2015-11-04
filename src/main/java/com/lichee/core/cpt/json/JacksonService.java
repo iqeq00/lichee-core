@@ -1,6 +1,7 @@
 package com.lichee.core.cpt.json;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +37,8 @@ public class JacksonService {
 			mapper.setSerializationInclusion(include);
 		}
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		mapper.setDateFormat(fmt);
 	}
 
 	public String toJson(Object object) {
