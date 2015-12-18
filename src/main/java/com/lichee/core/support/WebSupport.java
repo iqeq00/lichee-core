@@ -107,5 +107,16 @@ public class WebSupport {
 	    else  
 	        return false;  
 	}  
+	
+	public static String getUrl(HttpServletRequest request) {
+
+		String url = request.getScheme() + "://";
+		url += request.getHeader("host");
+		url += request.getRequestURI();
+		if (request.getQueryString() != null) {
+			url += "?" + request.getQueryString();
+		}
+		return url;
+	}
 
 }

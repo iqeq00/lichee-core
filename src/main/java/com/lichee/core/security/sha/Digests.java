@@ -55,7 +55,7 @@ public class Digests {
 	}
 	
 	public static void main(String[] args) {
-		String anc = "姚金池";	
+		String anc = "15680038916";	
 		String pwd = "123456";	
 		System.out.println(shaHex(pwd, anc));
 	}

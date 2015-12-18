@@ -1,6 +1,7 @@
 package com.lichee.core.repository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import com.lichee.core.repository.vo.Page;
@@ -53,5 +54,5 @@ public interface BaseDao<T, PK extends Serializable> extends CrudDao<T, PK> {
 	 */
 	Page<Object> findPageBean(final Page<Object> page, final String hql, final Map<String, ?> values);
 	
-	
+	List<Object> listByBean(final String hql, final Map<String, ?> values);
 }

@@ -260,5 +260,13 @@ public class BaseDaoImpl<T, PK extends Serializable> extends CrudDaoImpl<T, PK> 
 
 		return totalCount;
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object> listByBean(String hql, Map<String, ?> values) {
+		Query q = createQuery(hql, values);
+		List<Object> result = q.list();
+		return result;
+	}
 
 }
