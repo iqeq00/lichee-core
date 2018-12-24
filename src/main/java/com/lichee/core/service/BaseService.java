@@ -259,4 +259,5 @@ public interface BaseService<T, PK extends Serializable> {
 	Page<Object> findPageBean(Page<Object> page, String hql, Map<String, ?> values);
 	
 	List<Object> listByBean(final String hql, final Map<String, ?> values);
+
 }

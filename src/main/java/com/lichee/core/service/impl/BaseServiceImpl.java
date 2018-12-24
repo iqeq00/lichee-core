@@ -209,5 +209,4 @@ public class BaseServiceImpl<T, PK extends Serializable> implements
 		return baseDao.listByBean(hql, values);
 	}
 	
-
 }

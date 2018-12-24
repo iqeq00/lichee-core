@@ -236,4 +236,5 @@ public interface CrudDao<T, PK extends Serializable> {
 	 * @param oldValue 老值
 	 */
 	boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue);
+
 }
