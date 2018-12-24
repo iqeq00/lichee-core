@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 
 import com.lichee.core.repository.vo.Page;
 
@@ -182,6 +183,15 @@ public interface BaseService<T, PK extends Serializable> {
 	Query createSQLQuery(String sqlString, Class className);
 	
 	/**
+	 * 根据查询SQL与参数列表创建SQLQuery对象.
+	 * 与find()函数可进行更加灵活的操作.
+	 * 
+	 * @param sql sql查询语句.
+	 * @param className 绑定bean.
+	 */
+	Query sqlCreateQuery(String sqlString, Class className);
+	
+	/**
 	 * 执行一句sql
 	 * 
 	 * @param sql sql查询语句.
@@ -247,4 +257,6 @@ public interface BaseService<T, PK extends Serializable> {
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	Page<Object> findPageBean(Page<Object> page, String hql, Map<String, ?> values);
+	
+	List<Object> listByBean(final String hql, final Map<String, ?> values);
 }

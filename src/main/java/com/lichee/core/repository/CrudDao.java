@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 
 /**
  * CrudDao 基础Dao inf.
@@ -199,6 +200,14 @@ public interface CrudDao<T, PK extends Serializable> {
 	 * @param className 绑定bean.
 	 */
 	Query createSQLQuery(final String sql, final Class className);
+	
+	/**
+	 * 根据查询SQL与参数列表创建SQLQuery对象.
+	 * 
+	 * @param sql sql语句.
+	 * @param className 绑定bean.
+	 */
+	Query sqlCreateQuery(final String sqlString, final Class className);
 	
 	/**
 	 * 根据查询SQL与参数列表创建Query对象.

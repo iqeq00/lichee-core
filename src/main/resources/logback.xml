@@ -30,6 +30,7 @@
 	<logger name="${package}" level="INFO" />
 	<logger name="jdbc.sqltiming" level="INFO" />
 	<logger name="com.google" level="ERROR" />
+	<logger name="org.apache.commons.httpclient" level="ERROR" />
 	<logger name="net.rubyeye" level="ERROR" />
 	
 	<root level="WARN">

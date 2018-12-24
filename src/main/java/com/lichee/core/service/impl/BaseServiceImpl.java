@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 
 import com.lichee.core.repository.BaseDao;
 import com.lichee.core.repository.vo.Page;
@@ -139,6 +140,11 @@ public class BaseServiceImpl<T, PK extends Serializable> implements
 	}
 	
 	@Override
+	public Query sqlCreateQuery(final String sqlString, final Class className) {
+		return baseDao.sqlCreateQuery(sqlString, className);
+	}
+	
+	@Override
 	public void executeSQL(String sql) {
 		baseDao.executeSQL(sql);
 	}
@@ -196,5 +202,12 @@ public class BaseServiceImpl<T, PK extends Serializable> implements
 		}
 		return page;
 	}
+
+	@Override
+	public List<Object> listByBean(String hql, Map<String, ?> values) {
+		
+		return baseDao.listByBean(hql, values);
+	}
+	
 
 }

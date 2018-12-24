@@ -8,12 +8,14 @@ import java.util.Map;
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -211,6 +213,14 @@ public class CrudDaoImpl<T, PK extends Serializable> implements CrudDao<T, PK> {
 	public Query createSQLQuery(final String sqlString, final Class className) {
 		Assert.hasText(sqlString, "sqlString不能为空");
 		Query query = getSession().createSQLQuery(sqlString).addEntity(className);
+		return query;
+	}
+	
+	@Override
+	public Query sqlCreateQuery(final String sqlString, final Class className) {
+		
+		Assert.hasText(sqlString, "sqlString不能为空");
+		Query query = getSession().createSQLQuery(sqlString).setResultTransformer(Transformers.aliasToBean(className));
 		return query;
 	}
 	

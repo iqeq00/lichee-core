@@ -47,6 +47,30 @@ public class ImageUpload {
 	 * @param MultipartFile file multipartFile对象
 	 * @return String 上传后的文件名
 	 */
+	public String imageUploadType(String fileFolder, MultipartFile file, String contentType){    
+		
+		try {
+			String fileName = null;
+			if (!file.isEmpty()) {
+				File savedir = mkDirs(fileFolder);
+				fileName = imageScale.getImageName() + "." + contentType;
+				File saveFile = new File(savedir, fileName);
+				FileUtils.copyInputStreamToFile(file.getInputStream(), saveFile); 
+			}
+			return fileName;
+		} catch (IOException e) {
+			logger.error(ERROR_MSG);
+			return null;
+		}
+	}
+	
+	/**
+	 * 图片上传 one file(原图)
+	 * 
+	 * @param String fileFolder 上传的路径
+	 * @param MultipartFile file multipartFile对象
+	 * @return String 上传后的文件名
+	 */
 	public String imageUpload(String fileFolder, MultipartFile file){    
 		
 		try {

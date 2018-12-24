@@ -66,6 +66,7 @@ public class SmsService {
 
 		int nRet = OpenApi.sendOnce(smsInfo.getPhone(), smsInfo.getContent(),
 				0, 0, null);
+		System.out.println("nRet="+nRet);
 		if (nRet > 0) {
 			return true;
 		} else {

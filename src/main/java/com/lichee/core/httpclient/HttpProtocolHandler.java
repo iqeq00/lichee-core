@@ -1,7 +1,11 @@
 package com.lichee.core.httpclient;
 
 import org.apache.commons.httpclient.HttpException;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -18,6 +22,7 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +157,7 @@ public class HttpProtocolHandler {
         try {
             httpclient.executeMethod(method);
             if (request.getResultType().equals(HttpResultType.STRING)) {
-                response.setStringResult(method.getResponseBodyAsString());
+            	response.setStringResult(getResponseBodyAsString(method));
             } else if (request.getResultType().equals(HttpResultType.BYTES)) {
                 response.setByteResult(method.getResponseBody());
             }
@@ -172,7 +177,27 @@ public class HttpProtocolHandler {
         return response;
     }
 
-    /**
+    private String getResponseBodyAsString(HttpMethod method) {
+		
+		try {
+			InputStream inputStream = method.getResponseBodyAsStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+			StringBuffer stringBuffer = new StringBuffer();
+			String str = "";
+			while ((str = br.readLine()) != null) {
+				stringBuffer.append(str);
+			}
+			return str;
+		} catch (IOException e) {
+			try {
+				return method.getResponseBodyAsString();
+			} catch (IOException e1) {
+				return "";
+			}
+		}
+	}
+
+	/**
      * 将NameValuePairs数组转变为字符串
      * 
      * @param nameValues
